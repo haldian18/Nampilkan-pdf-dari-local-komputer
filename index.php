@@ -20,6 +20,7 @@
                 </div>
             </div>
         </form>
+        <button class="btn btn-primary" onclick="showPeriode()">Cari</button>
         <div class="card">
             <div class="card-body">
 
@@ -37,8 +38,8 @@
                         while (($file = readdir($dir)) !== false) {
                         ?>
                             <tr>
-                                <td><?= $file; ?></td>
-                                <td><?= date("Y-m-d", filemtime("./file/" . $file)); ?></td>
+                                <td><a class="filename" href="./file/<?= $file; ?>"><?= $file; ?></a></td>
+                                <td><a href="./file/<?= $file; ?>"><?= date("Y-m-d", filemtime("./file/" . $file)); ?></a></td>
                             </tr>
 
                         <?php }
@@ -62,39 +63,11 @@
 <script src="https://cdn.datatables.net/datetime/1.2.0/js/dataTables.dateTime.min.js"></script>
 
 <script>
-    var minDate, maxDate;
-    $.fn.dataTable.ext.search.push(
-        function(settings, data, dataIndex) {
-            var min = minDate.val();
-            var max = min;
-            var date = new Date(data[1]);
 
-            if (
-                (min === null && max === null) ||
-                (min === null && date <= max) ||
-                (min <= date && max === null) ||
-                (min <= date && date <= max)
-            ) {
-                return true;
-            }
-            return false;
-        }
-    );
-
-    $(document).ready(function() {
-        // Create date inputs
-        minDate = new DateTime($('#min'), {
-            format: 'Y-M-DD'
-        });
-
-        // DataTables initialisation
-        var table = $('#example').DataTable();
-
-        // Refilter the table
-        $('#min, #max').on('change', function() {
-            table.draw();
-        });
-    });
+    function showPeriode() {
+        console.log($('#min').val());
+        window.open($('.filename');
+    }
 </script>
 
 </html>
